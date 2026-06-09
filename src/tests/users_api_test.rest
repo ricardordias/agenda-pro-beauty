@@ -1,0 +1,36 @@
+@BASE = http://localhost:3000
+@ID_DO_USUARIO = 1
+
+### Listar todos os usuários
+GET {{BASE}}/users
+Accept: application/json
+
+### Criar um novo usuário
+POST {{BASE}}/users
+Content-Type: application/json
+
+{
+    "nomeUsuario": "Ana Almeida",
+    "emailUsuario": "ana@example.com",
+    "senha_hash": "senha123",
+    "perfil": "cliente"
+}
+
+### Atualizar um usuário existente
+PUT {{BASE}}/users/{{ID_DO_USUARIO}}
+Content-Type: application/json
+
+{
+    "nomeUsuario": "Julio Silva",
+    "emailUsuario": "julio@example.com",
+    "senha_hash": "senha123",
+    "perfil": "cliente"
+}
+
+### Deletar um usuário
+DELETE {{BASE}}/users/{{ID_DO_USUARIO}}
+Accept: application/json
+
+### Deletar um usuário inexistente
+DELETE {{BASE}}/users/999
+Accept: application/json    

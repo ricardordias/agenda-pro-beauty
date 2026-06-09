@@ -1,0 +1,37 @@
+# AgendaPro Beauty
+
+Sistema que permita o agendamento online de serviços de beleza e estética.
+
+## Objetivo
+Fornecer uma aplicação leve para controle de horários, serviços, profissionais e clientes.
+
+## Funcionalidades principais
+- Cadastro e login de usuários; 
+- Autenticação e controle básico de acesso; 
+- Cadastro, listagem, edição e exclusão de profissionais; 
+- Cadastro, listagem, edição e exclusão de serviços; 
+- Organização dos serviços por áreas do salão, como cabelo, manicure, estética facial, estética corporal ou massagens; 
+- Definição dos horários de trabalho de cada profissional; 
+- Bloqueio manual de horários; 
+- Consulta de horários disponíveis; 
+- Criação de agendamentos; 
+- Cancelamento ou reagendamento de horários, conforme regras definidas; 
+- Controle de status dos agendamentos, como Confirmado, Cancelado e Concluído; 
+- Geração de dados básicos para um futuro painel administrativo, como total de agendamentos, serviços mais solicitados e profissionais mais requisitados. 
+
+## Tecnologias
+O projeto utiliza as tecnologias:
+- JavaScript;
+- Node.js;
+- Express.js;
+- Banco de dados relacional MySQL;
+- API REST;
+- GitHub;
+- Ferramenta para teste de API.
+
+## Instalação
+1. Clonar repositório
+2. Instalar dependências com `npm install`
+3. Rodar servidor com `npm run dev`
+
+```

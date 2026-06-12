@@ -1,8 +1,17 @@
 const servicoModel = require("../models/servicoModel");
+const areaModel = require("../models/areaModel");
 
 class servicoService {
     static async getAllServicos() {
         return await servicoModel.findAll();
+    }
+
+    static async getServicosPorArea(area_id) {
+        const existingArea = await areaModel.findById(area_id);
+        if (!existingArea) {
+            throw new Error(`Área com ID ${area_id} não encontrada.`);
+        }
+        return await servicoModel.findByArea(area_id);
     }
 
     static async createServico(servico) {

@@ -6,6 +6,11 @@ class servicoModel {
         return rows;
     }
 
+    static async findByArea(area_id) {
+        const [rows] = await db.query("SELECT * FROM tb_servicos WHERE area_id = ?", [area_id]);
+        return rows;
+    }
+
     static async findByServico(nomeServico) {
         const [rows] = await db.query("SELECT * FROM tb_servicos WHERE nomeServico = ?", [nomeServico]);
         return rows[0];

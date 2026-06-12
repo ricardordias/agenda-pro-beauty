@@ -17,6 +17,7 @@ app.use("/users", userRoute);
 app.use("/profissionais", profissionalRoute);
 app.use("/areas", areaRoute);
 app.use("/servicos", servicoRoute);
+app.use("/servicos/:area_id", servicoRoute);
 app.use(errorMiddleware);
 
 module.exports = app;

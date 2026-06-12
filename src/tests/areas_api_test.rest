@@ -14,6 +14,15 @@ Content-Type: application/json
     "descricaoArea": "Área dedicada a serviços de cabeleireiro."
 }
 
+### Criar uma nova área repetida
+POST {{BASE}}/areas
+Content-Type: application/json
+
+{
+    "nomeArea": "Área de Cabeleireiro",
+    "descricaoArea": "Teste Área Repetida"
+}
+
 ### Atualizar uma área existente
 PUT {{BASE}}/areas/{{ID_DA_AREA}}
 Content-Type: application/json
@@ -21,6 +30,16 @@ Content-Type: application/json
 {
     "nomeArea": "Área de Cabeleireiro",
     "descricaoArea": "Área dedicada a serviços de cabeleireiro.",
+    "ativo": "1"
+}
+
+### Atualizar uma área inexistente
+PUT {{BASE}}/areas/999
+Content-Type: application/json
+
+{
+    "nomeArea": "Área Inexistente",
+    "descricaoArea": "Teste Área Inexistente.",
     "ativo": "1"
 }
 

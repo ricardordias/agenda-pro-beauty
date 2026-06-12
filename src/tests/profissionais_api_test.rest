@@ -27,6 +27,17 @@ Content-Type: application/json
     "ativo": "1"
 }
 
+### Atualizar um profissional inexistente
+PUT {{BASE}}/profissionais/999
+Content-Type: application/json
+
+{
+    "nomeProfissional": "Profissional Inexistente",
+    "especialidade": "Maquiadora",
+    "telefone": "54 99999-8888",
+    "ativo": "1"
+}
+
 ### Deletar um profissional
 DELETE {{BASE}}/profissionais/{{ID_DO_PROFISSIONAL}}
 Accept: application/json

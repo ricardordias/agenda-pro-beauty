@@ -6,6 +6,11 @@ class areaModel {
         return rows;
     }
 
+    static async findById(id) {
+        const [rows] = await db.query("SELECT * FROM tb_areas WHERE id = ?", [id]);
+        return rows[0];
+    }
+
     static async findByNome(nomeArea) {
         const [rows] = await db.query("SELECT * FROM tb_areas WHERE nomeArea = ?", [nomeArea]);
         return rows[0];

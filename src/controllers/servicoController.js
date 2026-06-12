@@ -10,6 +10,16 @@ class servicoController {
         }
     }
 
+    static async getServicosPorArea(req, res) {
+        try {
+            const areaId = req.params.area_id;
+            const servicos = await servicoService.getServicosPorArea(areaId);
+            res.json(servicos);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    }
+
     static async create(req, res) {
         try {
             const id = await servicoService.createServico(req.body);

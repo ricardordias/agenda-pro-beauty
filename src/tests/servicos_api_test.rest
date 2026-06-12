@@ -1,8 +1,13 @@
 @BASE = http://localhost:3000
 @ID_DO_SERVICO = 2
 
+
 ### Listar todos os serviços
 GET {{BASE}}/servicos
+Accept: application/json
+
+### Listar serviços por área
+GET {{BASE}}/servicos/area/2
 Accept: application/json
 
 ### Criar um novo serviço
@@ -10,10 +15,10 @@ POST {{BASE}}/servicos
 Content-Type: application/json
 
 {
-    "area_id": "1",
-    "nomeServico": "Unhas de Gel",
+    "area_id": "3",
+    "nomeServico": "Corte de Cabelo Masculino",
     "duracao_min": "30",
-    "preco": "20.00"
+    "preco": "25.00"
 }
 
 ### Atualizar um serviço existente
@@ -23,6 +28,17 @@ Content-Type: application/json
 {
     "area_id": "1",
     "nomeServico": "Unhas de Gel com Nail Art",
+    "duracao_min": "30",
+    "preco": "30.00"
+}
+
+### Atualizar um serviço inexistente
+PUT {{BASE}}/servicos/{{ID_DO_SERVICO}}
+Content-Type: application/json
+
+{
+    "area_id": "999",
+    "nomeServico": "Serviço Inexistente",
     "duracao_min": "30",
     "preco": "30.00"
 }

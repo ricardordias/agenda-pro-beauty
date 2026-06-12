@@ -16,6 +16,28 @@ Content-Type: application/json
     "perfil": "cliente"
 }
 
+### Criar um novo usuário com email inválido
+POST {{BASE}}/users
+Content-Type: application/json
+
+{
+    "nomeUsuario": "Teste E-mail Inválido",
+    "emailUsuario": "email_invalido",
+    "senha_hash": "senha123",
+    "perfil": "cliente"
+}
+
+### Criar um novo usuário com email repetido
+POST {{BASE}}/users
+Content-Type: application/json
+
+{
+    "nomeUsuario": "Teste E-mail Repetido",
+    "emailUsuario": "ana@example.com",
+    "senha_hash": "senha123",
+    "perfil": "cliente"
+}
+
 ### Atualizar um usuário existente
 PUT {{BASE}}/users/{{ID_DO_USUARIO}}
 Content-Type: application/json
@@ -23,6 +45,17 @@ Content-Type: application/json
 {
     "nomeUsuario": "Julio Silva",
     "emailUsuario": "julio@example.com",
+    "senha_hash": "senha123",
+    "perfil": "cliente"
+}
+
+### Atualizar um usuário inexistente
+PUT {{BASE}}/users/999
+Content-Type: application/json
+
+{
+    "nomeUsuario": "Usuário Inexistente",
+    "emailUsuario": "inexistente@example.com",
     "senha_hash": "senha123",
     "perfil": "cliente"
 }

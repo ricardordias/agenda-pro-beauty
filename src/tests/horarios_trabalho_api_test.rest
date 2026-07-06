@@ -1,0 +1,46 @@
+@BASE = http://localhost:3000
+
+### Listar todos os horários de trabalho
+GET {{BASE}}/horarios_trabalho
+Accept: application/json
+
+### Criar um novo horário de trabalho
+POST {{BASE}}/horarios_trabalho
+Content-Type: application/json
+
+{
+    "profissional_id": 3,
+    "dia_semana": "5",
+    "hora_inicio": "08:00",
+    "hora_fim": "16:30"
+}
+
+### Atualizar um horário de trabalho existente
+PUT {{BASE}}/horarios_trabalho/2
+Content-Type: application/json
+
+{
+    "profissional_id": 3,
+    "dia_semana": "5",
+    "hora_inicio": "08:00",
+    "hora_fim": "16:30"
+}
+
+### Atualizar um horário de trabalho inexistente
+PUT {{BASE}}/horarios_trabalho/999
+Content-Type: application/json
+
+{
+    "profissional_id": 3,
+    "dia_semana": "5",
+    "hora_inicio": "08:00",
+    "hora_fim": "16:30"
+}
+
+### Deletar um horário de trabalho existente
+DELETE {{BASE}}/horarios_trabalho/2
+Content-Type: application/json
+
+### Deletar um horário de trabalho inexistente
+DELETE {{BASE}}/horarios_trabalho/999
+Content-Type: application/json

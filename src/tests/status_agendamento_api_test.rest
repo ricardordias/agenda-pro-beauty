@@ -1,0 +1,47 @@
+@BASE = http://localhost:3000
+
+### Listar todos os status de agendamento
+GET {{BASE}}/status_agendamento
+
+### Listar status de agendamento por ID
+GET {{BASE}}/status_agendamento/1
+
+### Criar um novo status de agendamento
+POST {{BASE}}/status_agendamento
+Content-Type: application/json
+
+{
+    "nomeStatus": "Confirmado",
+    "descricaoStatus": "Agendamento confirmado pelo cliente"
+}
+
+### Criar um novo status de agendamento
+POST {{BASE}}/status_agendamento
+Content-Type: application/json
+
+{
+    "nomeStatus": "Agendado",
+    "descricaoStatus": "Agendamento criado e aguardando confirmação"
+}
+
+### Criar um novo status de agendamento
+POST {{BASE}}/status_agendamento
+Content-Type: application/json
+
+{
+    "nomeStatus": "Cancelado",
+    "descricaoStatus": "Agendamento cancelado pelo cliente"
+}
+
+### Atualizar um status de agendamento existente
+PUT {{BASE}}/status_agendamento/3
+Content-Type: application/json
+
+{
+    "nomeStatus": "Cancelado",
+    "descricaoStatus": "Agendamento cancelado pelo profissional"
+}
+
+### Deletar um status de agendamento
+DELETE {{BASE}}/status_agendamento/3
+

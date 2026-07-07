@@ -1,0 +1,15 @@
+@BASE = http://localhost:3000
+
+### Listar todos os horários bloqueados
+GET {{BASE}}/horarios_bloqueados
+
+### Criar um novo horário bloqueado
+POST {{BASE}}/horarios_bloqueados
+
+{
+    "profissional_id": 2,
+    "inicio": "2024-06-01T10:00:00",
+    "fim": "2024-06-01T12:00:00",
+    "motivo": "Intervalo"
+}
+

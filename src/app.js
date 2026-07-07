@@ -7,6 +7,9 @@ const profissionalRoute = require("./routes/profissionalRoute");
 const areaRoute = require("./routes/areaRoute");
 const servicoRoute = require("./routes/servicoRoute");
 const horarioTrabalhoRoute = require("./routes/horarioTrabalhoRoute");
+const statusAgendamentoRoute = require("./routes/statusAgendamentoRoute");
+const agendamentoRoute = require("./routes/agendamentoRoute");
+const horarioBloqueadoRoute = require("./routes/horarioBloqueadoRoute");
 const errorMiddleware = require("./middlewares/errorMiddleware");
 const app = express();
 
@@ -20,6 +23,9 @@ app.use("/areas", areaRoute);
 app.use("/servicos", servicoRoute);
 app.use("/servicos/:area_id", servicoRoute);
 app.use("/horarios_trabalho", horarioTrabalhoRoute);
+app.use("/status_agendamento", statusAgendamentoRoute);
+app.use("/agendamentos", agendamentoRoute);
+app.use("/horarios_bloqueados", horarioBloqueadoRoute);
 app.use(errorMiddleware);
 
 module.exports = app;

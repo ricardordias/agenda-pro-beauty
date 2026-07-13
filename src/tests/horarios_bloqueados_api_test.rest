@@ -5,11 +5,41 @@ GET {{BASE}}/horarios_bloqueados
 
 ### Criar um novo horário bloqueado
 POST {{BASE}}/horarios_bloqueados
+Content-Type: application/json
 
 {
     "profissional_id": 2,
-    "inicio": "2024-06-01T10:00:00",
-    "fim": "2024-06-01T12:00:00",
-    "motivo": "Intervalo"
+    "inicio": "2026-07-17T11:00:00",
+    "fim": "2026-07-17T12:00:00",
+    "motivo": "Folga"
 }
 
+### Atualizar um horário bloqueado existente
+PUT {{BASE}}/horarios_bloqueados/2
+Content-Type: application/json
+
+{
+    "profissional_id": 2,
+    "inicio": "2026-07-17T11:00:00",
+    "fim": "2026-07-17T12:00:00",
+    "motivo": "Folga"
+}
+
+### Atualizar um horário bloqueado inexistente
+PUT {{BASE}}/horarios_bloqueados/999
+Content-Type: application/json
+
+{
+    "profissional_id": 2,
+    "inicio": "2026-07-17T11:00:00",
+    "fim": "2026-07-17T12:00:00",
+    "motivo": "Folga"
+}
+
+### Deletar um horário bloqueado existente
+DELETE {{BASE}}/horarios_bloqueados/1
+Content-Type: application/json
+
+### Deletar um horário bloqueado inexistente
+DELETE {{BASE}}/horarios_bloqueados/999
+Content-Type: application/json

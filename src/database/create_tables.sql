@@ -71,7 +71,7 @@ CREATE TABLE tb_horarios_trabalho (
     id INT AUTO_INCREMENT PRIMARY KEY,
     profissional_id INT NOT NULL,
     FOREIGN KEY (profissional_id) REFERENCES tb_profissionais(id),
-    dia_semana VARCHAR(20) NOT NULL,
+    dia_semana INT NOT NULL,
     hora_inicio TIME NOT NULL,
     hora_fim TIME NOT NULL
 );

@@ -1,6 +1,4 @@
 @BASE = http://localhost:3000
-@ID_DO_SERVICO = 2
-
 
 ### Listar todos os serviços
 GET {{BASE}}/servicos
@@ -22,7 +20,7 @@ Content-Type: application/json
 }
 
 ### Atualizar um serviço existente
-PUT {{BASE}}/servicos/{{ID_DO_SERVICO}}
+PUT {{BASE}}/servicos/1
 Content-Type: application/json
 
 {
@@ -33,7 +31,7 @@ Content-Type: application/json
 }
 
 ### Atualizar um serviço inexistente
-PUT {{BASE}}/servicos/{{ID_DO_SERVICO}}
+PUT {{BASE}}/servicos/1
 Content-Type: application/json
 
 {
@@ -44,7 +42,7 @@ Content-Type: application/json
 }
 
 ### Deletar um serviço
-DELETE {{BASE}}/servicos/{{ID_DO_SERVICO}}
+DELETE {{BASE}}/servicos/1
 Accept: application/json
 
 ### Deletar um serviço inexistente

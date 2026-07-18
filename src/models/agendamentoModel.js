@@ -11,6 +11,14 @@ class agendamentoModel {
         return rows[0];
     }
 
+    static async findByProfissionalAndData(profissionalId, dataInicio, dataFim) {
+        const [rows] = await db.query(
+            "SELECT * FROM tb_agendamentos WHERE profissional_id = ? AND data_hora_inicio >= ? AND data_hora_inicio < ?",
+            [profissionalId, dataInicio, dataFim]
+        );
+        return rows;
+    }
+
     static async findByNome(nomeArea) {
         const [rows] = await db.query("SELECT * FROM tb_areas WHERE nomeArea = ?", [nomeArea]);
         return rows[0];

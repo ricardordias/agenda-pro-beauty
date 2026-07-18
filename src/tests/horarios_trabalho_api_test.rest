@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
     "profissional_id": 3,
-    "dia_semana": "5",
+    "dia_semana": "1",
     "hora_inicio": "08:00",
     "hora_fim": "16:30"
 }
@@ -20,8 +20,8 @@ PUT {{BASE}}/horarios_trabalho/2
 Content-Type: application/json
 
 {
-    "profissional_id": 3,
-    "dia_semana": "5",
+    "profissional_id": 2,
+    "dia_semana": 5,
     "hora_inicio": "08:00",
     "hora_fim": "16:30"
 }

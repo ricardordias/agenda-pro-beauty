@@ -15,14 +15,14 @@ Content-Type: application/json
 }
 
 ### Atualizar um horário bloqueado existente
-PUT {{BASE}}/horarios_bloqueados/2
+PUT {{BASE}}/horarios_bloqueados/1
 Content-Type: application/json
 
 {
     "profissional_id": 2,
     "inicio": "2026-07-17T11:00:00",
     "fim": "2026-07-17T12:00:00",
-    "motivo": "Folga"
+    "motivo": "Feriado"
 }
 
 ### Atualizar um horário bloqueado inexistente

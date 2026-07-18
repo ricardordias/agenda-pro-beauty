@@ -17,6 +17,11 @@ class horarioTrabalhoModel {
         return rows[0];
     }
 
+    static async findByProfissionalAndDia(profissionalId, diaSemana) {
+        const [rows] = await db.query("SELECT * FROM tb_horarios_trabalho WHERE profissional_id = ? AND dia_semana = ?", [profissionalId, diaSemana]);
+        return rows;
+    }
+
     static async findById(id) {
         const [rows] = await db.query("SELECT * FROM tb_horarios_trabalho WHERE id = ?", [id]);
         return rows[0];

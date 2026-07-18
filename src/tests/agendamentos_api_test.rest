@@ -14,10 +14,13 @@ POST {{BASE}}/agendamentos
 Content-Type: application/json
 
 {
-    "usuario_id": 2,
+    "usuario_id": 1,
     "profissional_id": 2,
-    "servico_id": "1",
-    "status_id": "2",
+    "servico_id": "2",
+    "status_id": "1",
     "data_hora_inicio": "2026-07-10 10:00:00",
     "data_hora_fim": "2026-07-10 10:30:00"
 }
+
+### Listar horários disponíveis para um profissional em uma data específica
+GET {{BASE}}/agendamentos/disponibilidade?profissional_id=2&dia_semana=5

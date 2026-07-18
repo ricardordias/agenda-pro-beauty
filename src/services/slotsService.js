@@ -1,61 +1,62 @@
-const slotsModel = require("../models/slotsModel");
 const horarioTrabalhoModel = require("../models/horarioTrabalhoModel");
 const horarioBloqueadoModel = require("../models/horarioBloqueadoModel");
 const agendamentoModel = require("../models/agendamentoModel");
-const servicoModel = require("../models/servicoModel");
 
 class slotsService {
     static async consultarDisponibilidade(profissional_id, data) {
-        // Verifica se o profissional tem horários de trabalho definidos para o dia da semana da data fornecida
-        const diaSemana = new Date(data).getDay(); // 0 (Domingo) a 6 (Sábado)
-        const horariosTrabalho = await horarioTrabalhoModel.findByProfissionalAndDia(profissional_id, diaSemana);
+        const dataObj = new Date(data);
+        if (Number.isNaN(dataObj.getTime())) {
+            throw new Error("Data inválida.");
+        }
+
+        const diaSemana = dataObj.getDay(); // 0 (Domingo) a 6 (Sábado)
+        const horariosTrabalho = await horarioTrabalhoModel.findByProfissionalAndDia(profissional_id, diaSemana.toString());
         if (!horariosTrabalho || horariosTrabalho.length === 0) {
-            throw new Error(`Profissional não trabalha nesse dia.`);
+            throw new Error("Profissional não trabalha nesse dia.");
         }
 
-        const inicioMinutos = this._horaParaMinutos(horarioTrabalho.hora_inicio);
-        const fimMinutos = this._horaParaMinutos(horarioTrabalho.hora_fim);
+        const dataInicio = `${data} 00:00:00`;
+        const nextDay = new Date(dataObj);
+        nextDay.setDate(nextDay.getDate() + 1);
+        const dataFim = `${nextDay.getFullYear().toString().padStart(4, '0')}-${(nextDay.getMonth() + 1).toString().padStart(2, '0')}-${nextDay.getDate().toString().padStart(2, '0')} 00:00:00`;
 
-        if (inicioMinutos >= fimMinutos) {
-            throw new Error(`Horário de trabalho inválido.`);
-        }
-
-        const dataInicio = new Date(data);
-        const dataFim = new Date(data);
         const agendamentos = await agendamentoModel.findByProfissionalAndData(profissional_id, dataInicio, dataFim);
-
         const horariosBloqueados = await horarioBloqueadoModel.findByProfissionalAndData(profissional_id, dataInicio, dataFim);
 
-        const converterMinutos = agendamentos.map(agendamento => ({
-            inicio: new Date(agendamento.data_hora_inicio).getTime() / 60000, // Convertendo para minutos
-            fim: new Date(agendamento.data_hora_fim).getTime() / 60000 // Convertendo para minutos
-        }));
-
-        const bloqueados = await horariosBloqueadoModel.findByProfissionalAndData(profissional_id, dataInicio, dataFim);
-        const bloqueadosMinutos = bloqueados.map(bloqueado => ({
-            inicio: new Date(bloqueado.data_hora_inicio).getTime() / 60000, // Convertendo para minutos
-            fim: new Date(bloqueado.data_hora_fim).getTime() / 60000 // Convertendo para minutos
-        }));
-
-        const todosBloqueados = [...converterMinutos, ...bloqueadosMinutos];
+        const bloqueios = [
+            ...agendamentos.map((agendamento) => ({
+                inicio: this._datetimeParaMinutos(agendamento.data_hora_inicio),
+                fim: this._datetimeParaMinutos(agendamento.data_hora_fim),
+            })),
+            ...horariosBloqueados.map((bloqueado) => ({
+                inicio: this._datetimeParaMinutos(bloqueado.inicio),
+                fim: this._datetimeParaMinutos(bloqueado.fim),
+            })),
+        ];
 
         const slots = [];
-        let current = inicioMinutos;
-        while (current + 30 <= fimMinutos) { // Supondo que cada slot tenha 30 minutos
-            const slotInicio = current;
-            const slotFim = current + 30;
-            // Verificar se o slot está disponível
-            let isAvailable = true;
-            for (const blocked of todosBloqueados) {
-                if (slotInicio < blocked.fim && slotFim > blocked.inicio) {
-                    isAvailable = false;
-                    break;
+        for (const horario of horariosTrabalho) {
+            const inicioMinutos = this._horaParaMinutos(horario.hora_inicio);
+            const fimMinutos = this._horaParaMinutos(horario.hora_fim);
+
+            if (inicioMinutos >= fimMinutos) {
+                continue;
+            }
+
+            let current = inicioMinutos;
+            while (current + 30 <= fimMinutos) {
+                const slotInicio = current;
+                const slotFim = current + 30;
+                const isAvailable = !bloqueios.some((bloqueio) => slotInicio < bloqueio.fim && slotFim > bloqueio.inicio);
+
+                if (isAvailable) {
+                    slots.push({
+                        inicio: this._minutosParaHora(slotInicio),
+                        fim: this._minutosParaHora(slotFim),
+                    });
                 }
+                current = slotFim;
             }
-            if (isAvailable) {
-                slots.push({ inicio: slotInicio, fim: slotFim });
-            }
-            current = slotFim;
         }
         return slots;
     }

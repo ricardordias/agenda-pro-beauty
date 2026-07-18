@@ -10,9 +10,9 @@ POST {{BASE}}/profissionais
 Content-Type: application/json
 
 {
-    "nomeProfissional": "Julia Silva",
+    "nomeProfissional": "Maria Silva",
     "especialidade": "Manicure",
-    "telefone": "54 98888-7777",
+    "telefone": "54 98888-6666",
     "ativo": "1"
 }
 

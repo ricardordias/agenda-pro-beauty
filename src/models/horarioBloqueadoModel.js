@@ -17,6 +17,14 @@ class horarioBloqueadoModel {
         return rows[0];
     }
 
+    static async findByProfissionalAndData(profissionalId, dataInicio, dataFim) {
+        const [rows] = await db.query(
+            "SELECT * FROM tb_horarios_bloqueados WHERE profissional_id = ? AND inicio >= ? AND inicio < ?",
+            [profissionalId, dataInicio, dataFim]
+        );
+        return rows;
+    }
+
     static async findById(id) {
         const [rows] = await db.query("SELECT * FROM tb_horarios_bloqueados WHERE id = ?", [id]);
         return rows[0];

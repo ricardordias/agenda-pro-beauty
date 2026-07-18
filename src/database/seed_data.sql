@@ -40,15 +40,17 @@ INSERT INTO tb_status_agendamento (nomeStatus, descricaoStatus) VALUES
 ('Não Compareceu', 'Cliente faltou sem aviso prévio');
 
 -- 6. Alimentando os Horários de Trabalho (tb_horarios_trabalho)
--- dia_semana: 1 = Domingo, 2 = Segunda, 3 = Terça, ..., 7 = Sábado (padrão comum)
+-- dia_semana: 0 = Domingo, 1 = Segunda, 2 = Terça, ..., 6 = Sábado (padrão comum)
 INSERT INTO tb_horarios_trabalho (profissional_id, dia_semana, hora_inicio, hora_fim) VALUES
-(1, 3, '09:00:00', '18:00:00'), -- Roberto (Terça)
-(1, 4, '09:00:00', '18:00:00'), -- Roberto (Quarta)
-(1, 5, '09:00:00', '20:00:00'), -- Roberto (Quinta - horário estendido)
-(2, 4, '08:00:00', '17:00:00'), -- Juliana (Quarta)
-(2, 5, '08:00:00', '17:00:00'), -- Juliana (Quinta)
-(2, 6, '08:00:00', '18:00:00'), -- Juliana (Sexta)
-(3, 3, '10:00:00', '19:00:00'); -- Beatriz (Terça)
+(1, 3, '09:00:00', '17:30:00'), -- Roberto (Quarta)
+(1, 4, '09:00:00', '17:30:00'), -- Roberto (Quinta)
+(1, 5, '09:00:00', '17:30:00'), -- Roberto (Sexta)
+(2, 4, '08:00:00', '17:00:00'), -- Juliana (Quinta)
+(2, 5, '08:00:00', '17:00:00'), -- Juliana (Sexta)
+(2, 6, '08:00:00', '18:00:00'), -- Juliana (Sábado)
+(3, 3, '11:30:00', '20:00:00'); -- Beatriz (Quarta)
+(3, 4, '11:30:00', '20:00:00'), -- Beatriz (Quinta)
+(3, 5, '11:30:00', '20:00:00'), -- Beatriz (Sexta)
 
 -- 7. Alimentando os Horários Bloqueados (tb_horarios_bloqueados)
 INSERT INTO tb_horarios_bloqueados (profissional_id, inicio, fim, motivo) VALUES

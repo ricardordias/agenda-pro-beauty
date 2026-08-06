@@ -1,5 +1,4 @@
 @BASE = http://localhost:3000
-@ID_DO_PROFISSIONAL = 1
 
 ### Listar todos os profissionais
 GET {{BASE}}/profissionais
@@ -17,7 +16,7 @@ Content-Type: application/json
 }
 
 ### Atualizar um profissional existente
-PUT {{BASE}}/profissionais/{{ID_DO_PROFISSIONAL}}
+PUT {{BASE}}/profissionais/1
 Content-Type: application/json
 
 {
@@ -39,7 +38,7 @@ Content-Type: application/json
 }
 
 ### Deletar um profissional
-DELETE {{BASE}}/profissionais/{{ID_DO_PROFISSIONAL}}
+DELETE {{BASE}}/profissionais/1
 Accept: application/json
 
 ### Deletar um profissional inexistente

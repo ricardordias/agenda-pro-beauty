@@ -1,5 +1,4 @@
 @BASE = http://localhost:3000
-@ID_DA_AREA = 2
 
 ### Listar todas as áreas
 GET {{BASE}}/areas
@@ -24,7 +23,7 @@ Content-Type: application/json
 }
 
 ### Atualizar uma área existente
-PUT {{BASE}}/areas/{{ID_DA_AREA}}
+PUT {{BASE}}/areas/1
 Content-Type: application/json
 
 {
@@ -44,7 +43,7 @@ Content-Type: application/json
 }
 
 ### Deletar uma área
-DELETE {{BASE}}/areas/{{ID_DA_AREA}}
+DELETE {{BASE}}/areas/1
 Accept: application/json
 
 ### Deletar uma área inexistente

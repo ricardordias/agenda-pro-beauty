@@ -1,5 +1,4 @@
 @BASE = http://localhost:3000
-@ID_DO_USUARIO = 1
 
 ### Listar todos os usuários
 GET {{BASE}}/users
@@ -39,7 +38,7 @@ Content-Type: application/json
 }
 
 ### Atualizar um usuário existente
-PUT {{BASE}}/users/{{ID_DO_USUARIO}}
+PUT {{BASE}}/users/1
 Content-Type: application/json
 
 {
@@ -61,7 +60,7 @@ Content-Type: application/json
 }
 
 ### Deletar um usuário
-DELETE {{BASE}}/users/{{ID_DO_USUARIO}}
+DELETE {{BASE}}/users/1
 Accept: application/json
 
 ### Deletar um usuário inexistente

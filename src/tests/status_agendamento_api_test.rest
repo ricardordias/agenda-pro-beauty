@@ -4,7 +4,7 @@
 GET {{BASE}}/status_agendamento
 
 ### Listar status de agendamento por ID
-GET {{BASE}}/status_agendamento/1
+GET {{BASE}}/status_agendamento/2
 
 ### Criar um novo status de agendamento
 POST {{BASE}}/status_agendamento

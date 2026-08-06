@@ -24,7 +24,11 @@ app.use("/servicos", servicoRoute);
 app.use("/servicos/:area_id", servicoRoute);
 app.use("/horarios_trabalho", horarioTrabalhoRoute);
 app.use("/status_agendamento", statusAgendamentoRoute);
+app.use("/status_agendamento/:id", statusAgendamentoRoute);
 app.use("/agendamentos", agendamentoRoute);
+app.use("/agendamentos/:status_id", agendamentoRoute);
+app.use("/agendamentos/:profissional_id", agendamentoRoute);
+app.use("/agendamentos/disponibilidade", agendamentoRoute);
 app.use("/horarios_bloqueados", horarioBloqueadoRoute);
 app.use(errorMiddleware);
 

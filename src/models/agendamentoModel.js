@@ -19,6 +19,14 @@ class agendamentoModel {
         return rows;
     }
 
+    static async findOverlappingByProfissional(profissionalId, dataInicio, dataFim) {
+        const [rows] = await db.query(
+            "SELECT * FROM tb_agendamentos WHERE profissional_id = ? AND data_hora_inicio < ? AND data_hora_fim > ?",
+            [profissionalId, dataFim, dataInicio]
+        );
+        return rows;
+    }
+
     static async findByNome(nomeArea) {
         const [rows] = await db.query("SELECT * FROM tb_areas WHERE nomeArea = ?", [nomeArea]);
         return rows[0];

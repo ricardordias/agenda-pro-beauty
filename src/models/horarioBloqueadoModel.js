@@ -25,6 +25,14 @@ class horarioBloqueadoModel {
         return rows;
     }
 
+    static async findOverlappingByProfissional(profissionalId, inicio, fim) {
+        const [rows] = await db.query(
+            "SELECT * FROM tb_horarios_bloqueados WHERE profissional_id = ? AND inicio < ? AND fim > ?",
+            [profissionalId, fim, inicio]
+        );
+        return rows;
+    }
+
     static async findById(id) {
         const [rows] = await db.query("SELECT * FROM tb_horarios_bloqueados WHERE id = ?", [id]);
         return rows[0];

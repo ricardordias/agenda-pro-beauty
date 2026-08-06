@@ -5,6 +5,14 @@ class statusAgendamentoService {
         return await statusAgendamentoModel.findAll();
     }
 
+    static async getStatusAgendamentoPorId(id) {
+        const statusAgendamento = await statusAgendamentoModel.findById(id);
+        if (!statusAgendamento) {
+            throw new Error(`Status de agendamento com ID ${id} não encontrado.`);
+        }
+        return statusAgendamento;
+    }
+
     static async createStatusAgendamento(status) {
         const existingStatus = await statusAgendamentoModel.findByNome(status.nomeStatus);
         if (existingStatus) {

@@ -10,6 +10,36 @@ class agendamentoController {
         }
     }
 
+    static async getByUsuario(req, res) {
+        try {
+            const id = req.params.id;
+            const agendamentos = await agendamentoService.getAgendamentosByUsuario(id);
+            res.json(agendamentos);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    }
+
+    static async getByProfissional(req, res) {
+        try {
+            const id = req.params.id;
+            const agendamentos = await agendamentoService.getAgendamentosByProfissional(id);
+            res.json(agendamentos);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    }
+
+    static async getByStatus(req, res) {
+        try {
+            const id = req.params.id;
+            const agendamentos = await agendamentoService.getAgendamentosByStatus(id);
+            res.json(agendamentos);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    }
+
     static async create(req, res) {
         try {
             const id = await agendamentoService.createAgendamento(req.body);

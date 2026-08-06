@@ -10,6 +10,16 @@ class statusAgendamentoController {
         }
     }
 
+    static async getStatusAgendamentoPorId(req, res) {
+        try {
+            const id = req.params.id;
+            const statusAgendamento = await statusAgendamentoService.getStatusAgendamentoPorId(id);
+            res.json(statusAgendamento);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    }
+
     static async create(req, res) {
         try {
             const id = await statusAgendamentoService.createStatusAgendamento(req.body);

@@ -7,6 +7,18 @@ class agendamentoService {
         return await agendamentoModel.findAll();
     }
 
+    static async getAgendamentosByUsuario(usuarioId) {
+        return await agendamentoModel.findByUsuario(usuarioId);
+    }
+
+    static async getAgendamentosByProfissional(profissionalId) {
+        return await agendamentoModel.findByProfissional(profissionalId);
+    }
+
+    static async getAgendamentosByStatus(statusId) {
+        return await agendamentoModel.findByStatus(statusId);
+    }
+
     static async createAgendamento(agendamento) {
         const { usuario_id, profissional_id, servico_id, status_id, data_hora_inicio, data_hora_fim } = agendamento;
 

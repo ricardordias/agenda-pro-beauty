@@ -15,6 +15,14 @@ class agendamentoService {
         return await agendamentoModel.findByProfissional(profissionalId);
     }
 
+    static async getAgendamentosByUsuarioAndStatus(usuarioId, statusId) {
+        return await agendamentoModel.findByUsuarioAndStatus(usuarioId, statusId);
+    }
+
+    static async getAgendamentosByProfissionalAndStatus(profissionalId, statusId) {
+        return await agendamentoModel.findByProfissionalAndStatus(profissionalId, statusId);
+    }
+
     static async getAgendamentosByStatus(statusId) {
         return await agendamentoModel.findByStatus(statusId);
     }
@@ -77,7 +85,52 @@ class agendamentoService {
     }
 
     static async updateAgendamento(id, agendamento) {
-        const updatedRows = await agendamentoModel.update(id, agendamento);
+        const existing = await agendamentoModel.findById(id);
+        if (!existing) {
+            throw new Error(`Agendamento não encontrado.`);
+        }
+
+        const now = new Date();
+        const inicioExistente = this._parseDateTime(existing.data_hora_inicio);
+        if (!inicioExistente) {
+            throw new Error("Agendamento existente com data/hora inválida.");
+        }
+
+        // Cancellation: require at least 2 hours before start
+        const incomingStatus = agendamento.status_id;
+        const isCancel = String(incomingStatus) === "3";
+        if (isCancel) {
+            const twoHoursBefore = new Date(inicioExistente.getTime() - 2 * 60 * 60 * 1000);
+            if (now > twoHoursBefore) {
+                throw new Error("Cancelamento só permitido com no mínimo 2 horas de antecedência.");
+            }
+            const updatedRows = await agendamentoModel.update(id, { ...existing, ...agendamento });
+            if (updatedRows === 0) {
+                throw new Error(`Agendamento não encontrado.`);
+            }
+            return updatedRows;
+        }
+
+        // Re-schedule: if times changed, cancel current (respecting 2h rule) and create a new agendamento
+        const datesChanged = agendamento.data_hora_inicio && agendamento.data_hora_fim &&
+            (agendamento.data_hora_inicio !== existing.data_hora_inicio || agendamento.data_hora_fim !== existing.data_hora_fim);
+
+        if (datesChanged) {
+            const twoHoursBefore = new Date(inicioExistente.getTime() - 2 * 60 * 60 * 1000);
+            if (now > twoHoursBefore) {
+                throw new Error("Reagendamento só permitido com no mínimo 2 horas de antecedência do horário atual.");
+            }
+
+            // mark existing as canceled (status_id = 3)
+            await agendamentoModel.update(id, { ...existing, status_id: 3 });
+
+            // create new appointment using existing validations
+            const newId = await this.createAgendamento(agendamento);
+            return newId;
+        }
+
+        // Default update (no reschedule/cancel)
+        const updatedRows = await agendamentoModel.update(id, { ...existing, ...agendamento });
         if (updatedRows === 0) {
             throw new Error(`Agendamento não encontrado.`);
         }
@@ -92,8 +145,21 @@ class agendamentoService {
         return deletedRows;
     }
 
-    static _parseDateTime(datetimeString) {
-        const [datePart, timePart] = datetimeString.split(" ");
+    static _parseDateTime(datetime) {
+        if (datetime instanceof Date) {
+            return datetime;
+        }
+
+        if (typeof datetime === "number") {
+            const date = new Date(datetime);
+            return Number.isNaN(date.getTime()) ? null : date;
+        }
+
+        if (typeof datetime !== "string") {
+            return null;
+        }
+
+        const [datePart, timePart] = datetime.split(" ");
         if (!datePart || !timePart) {
             return null;
         }

@@ -43,9 +43,25 @@ class agendamentoModel {
         return rows;
     }
 
+    static async findByUsuarioAndStatus(usuarioId, statusId) {
+        const [rows] = await db.query(
+            "SELECT * FROM tb_agendamentos WHERE usuario_id = ? AND status_id = ? ORDER BY data_hora_inicio ASC",
+            [usuarioId, statusId]
+        );
+        return rows;
+    }
+
+    static async findByProfissionalAndStatus(profissionalId, statusId) {
+        const [rows] = await db.query(
+            "SELECT * FROM tb_agendamentos WHERE profissional_id = ? AND status_id = ? ORDER BY data_hora_inicio ASC",
+            [profissionalId, statusId]
+        );
+        return rows;
+    }
+
     static async findOverlappingByProfissional(profissionalId, dataInicio, dataFim) {
         const [rows] = await db.query(
-            "SELECT * FROM tb_agendamentos WHERE profissional_id = ? AND data_hora_inicio < ? AND data_hora_fim > ?",
+            "SELECT * FROM tb_agendamentos WHERE profissional_id = ? AND status_id != 3 AND data_hora_inicio < ? AND data_hora_fim > ?",
             [profissionalId, dataFim, dataInicio]
         );
         return rows;

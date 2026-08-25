@@ -15,7 +15,7 @@ CREATE TABLE tb_usuarios (
     nomeUsuario VARCHAR(100) NOT NULL,
     emailUsuario VARCHAR(100) NOT NULL UNIQUE,
     senha_hash VARCHAR(100) NOT NULL,
-    perfil VARCHAR(100) NOT NULL,
+    perfil VARCHAR(50) NOT NULL DEFAULT 'cliente',
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

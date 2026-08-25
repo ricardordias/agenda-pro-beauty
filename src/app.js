@@ -1,5 +1,8 @@
 const express = require("express");
 const cors = require("cors");
+const authRoute = require("./routes/auth.route");
+const publicRoute = require("./routes/public.route");
+const protectedRoute = require("./routes/protected.route");
 const helmet = require("helmet");
 const serverRoute = require("./routes/serverRoute");
 const userRoute = require("./routes/userRoute");
@@ -17,6 +20,9 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use("/", serverRoute);
+app.use("/auth", authRoute);
+app.use("/public", publicRoute);
+app.use("/protected", protectedRoute);
 app.use("/users", userRoute);
 app.use("/profissionais", profissionalRoute);
 app.use("/areas", areaRoute);

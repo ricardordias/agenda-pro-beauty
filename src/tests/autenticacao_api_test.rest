@@ -1,0 +1,51 @@
+@BASEURL = http://localhost:3000
+
+### Rota pública (acesso livre)
+GET {{BASEURL}}/public/home
+Content-Type: application/json
+
+### Cadastro de novo usuário
+POST {{BASEURL}}/auth/register
+Content-Type: application/json
+
+{
+    "nomeUsuario": "Usuário novo",
+    "emailUsuario": "novo@ifrs.edu.br",
+    "senha_hash": "senha123",
+    "perfil": "cliente"
+}
+
+### Login do novo usuário (pegar o token gerado abaixo)
+POST {{BASEURL}}/auth/login
+Content-Type: application/json
+
+{
+    "emailUsuario": "novo@ifrs.edu.br",
+    "senha_hash": "senha123"
+}
+
+### Login do usuário comum (usuário já existente no banco)
+POST {{BASEURL}}/auth/login
+Content-Type: application/json
+
+{
+    "emailUsuario": "usuario@ifrs.edu.br",
+    "senha_hash": "senha123"
+}
+
+### Login do administrador (usuário já existente no banco)
+POST {{BASEURL}}/auth/login
+Content-Type: application/json
+
+{
+    "emailUsuario": "admin@probeauty.com",
+    "senha_hash": "senha123"
+}
+
+### Acesso ao painel (rota protegida, requer token de qualquer usuário autenticado)
+GET {{BASEURL}}/protected/dashboard
+Authorization: Bearer {{eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5vdm9AaWZycy5lZHUuYnIiLCJwZXJmaWwiOiJjbGllbnRlIiwiaWF0IjoxNzg3NzczMTgyLCJleHAiOjE3ODc3NzY3ODJ9.gLqqkfstuJcEIIf0vvJOAMvBNzwbLUePOw_ZXhlH51s}}
+
+### Acesso à área admin (rota protegida, requer token de usuário com perfil "admin")
+GET {{BASEURL}}/protected/admin
+Authorization: Bearer {{}}

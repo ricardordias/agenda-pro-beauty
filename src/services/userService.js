@@ -1,3 +1,5 @@
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
 const validateEmail = require("../utils/validateEmail");
@@ -32,6 +34,32 @@ class userService {
             throw new Error(`Usuário não encontrado.`);
         }
         return deletedRows;
+    }
+
+    static async registerUser(user) {
+        const { nomeUsuario, emailUsuario, senha_hash, perfil } = user;
+        const existing = await userModel.findByEmail(user.emailUsuario);
+        if (existing) {
+            throw new Error("E-mail já cadastrado.");
+        }
+        const hashed = await bcrypt.hash(user.senha_hash, 10);
+        user.senha_hash = hashed;
+        const id = await userModel.create(user);
+        return { message: "Usuário registrado com sucesso.", id };
+    }
+
+    static async loginUser({ emailUsuario, senha_hash }) {
+        const user = await userModel.findByEmail(emailUsuario);
+        if (!user) {
+            throw new Error("Usuário não encontrado.");
+        }
+        const valid = await bcrypt.compare(senha_hash, user.senha_hash);
+        if (!valid) {
+            throw new Error("Senha inválida.");
+        }
+        const token = jwt.sign({ email: user.emailUsuario, perfil: user.perfil }, process.env.JWT_SECRET, { expiresIn: "1h" }
+        );
+        return { token, user: { email: user.emailUsuario, perfil: user.perfil }};
     }
 }
 

@@ -57,9 +57,9 @@ class userService {
         if (!valid) {
             throw new Error("Senha inválida.");
         }
-        const token = jwt.sign({ email: user.emailUsuario, perfil: user.perfil }, process.env.JWT_SECRET, { expiresIn: "1h" }
+        const token = jwt.sign({ nome: user.nomeUsuario, email: user.emailUsuario, perfil: user.perfil }, process.env.JWT_SECRET, { expiresIn: "1h" }
         );
-        return { token, user: { email: user.emailUsuario, perfil: user.perfil }};
+        return { token, user: { nome: user.nomeUsuario, email: user.emailUsuario, perfil: user.perfil }};
     }
 }
 

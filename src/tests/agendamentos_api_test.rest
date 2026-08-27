@@ -1,20 +1,35 @@
 @BASE = http://localhost:3000
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21lIjoiQW5hIFNpbHZhIiwiZW1haWwiOiJhbmEuc2lsdmFAZW1haWwuY29tIiwicGVyZmlsIjoiY2xpZW50ZSIsImlhdCI6MTc4Nzg0MTY2MCwiZXhwIjoxNzg3ODQ1MjYwfQ.sN9jXQBxTdLCjIrDX5BFxlt_8TeAgR3BCK0fbio-QyM
+
+### Login do novo usuário (pegar o token gerado abaixo)
+POST {{BASE}}/auth/login
+Content-Type: application/json
+
+{
+    "emailUsuario": "ana.silva@email.com",
+    "senha_hash": "senha123"
+}
 
 ### Listar todos os agendamentos
 GET {{BASE}}/agendamentos
+Authorization: Bearer {{TOKEN}}
 
 ### Listar agendamento por usuário
 GET {{BASE}}/agendamentos/usuario/2
+Authorization: Bearer {{TOKEN}}
 
 ### Listar agendamento por profissional
 GET {{BASE}}/agendamentos/profissional/2
+Authorization: Bearer {{TOKEN}}
 
 ### Listar agendamento por status
 GET {{BASE}}/agendamentos/status/3
+Authorization: Bearer {{TOKEN}}
 
 ### Criar um novo agendamento
 POST {{BASE}}/agendamentos
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "usuario_id": 1,
@@ -28,6 +43,7 @@ Content-Type: application/json
 ### Atualizar status de um agendamento existente
 PUT {{BASE}}/agendamentos/15
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "usuario_id": 1,
@@ -41,6 +57,7 @@ Content-Type: application/json
 ### Reagendar um agendamento existente
 PUT {{BASE}}/agendamentos/15
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "usuario_id": 1,
@@ -57,6 +74,7 @@ GET {{BASE}}/agendamentos/disponibilidade?profissional_id=1&data=2026-07-10
 ### Cancelar um agendamento existente
 PUT {{BASE}}/agendamentos/18
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "usuario_id": 1,
@@ -69,9 +87,12 @@ Content-Type: application/json
 
 ### Listar agendamento por usuário e status
 GET {{BASE}}/agendamentos/usuario/1/status/2
+Authorization: Bearer {{TOKEN}}
 
 ### Listar agendamento por profissional e status
 GET {{BASE}}/agendamentos/profissional/3/status/1
+Authorization: Bearer {{TOKEN}}
 
 ### Deletar um agendamento existente
 DELETE {{BASE}}/agendamentos/17
+Authorization: Bearer {{TOKEN}}

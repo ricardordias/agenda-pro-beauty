@@ -1,12 +1,24 @@
 @BASE = http://localhost:3000
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21lIjoiQWRtaW5pc3RyYWRvciIsImVtYWlsIjoiYWRtaW5AcHJvYmVhdXR5LmNvbSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNzg3ODQyMzE2LCJleHAiOjE3ODc4NDU5MTZ9.G1x_AAibNJVMXym1RV6xH31zPAYFDWrjoBG_n3N5l9g
+
+### Login do novo usuário (pegar o token gerado abaixo)
+POST {{BASE}}/auth/login
+Content-Type: application/json
+
+{
+    "emailUsuario": "admin@probeauty.com",
+    "senha_hash": "senha123"
+}
 
 ### Listar todas as áreas
 GET {{BASE}}/areas
 Accept: application/json
+Authorization: Bearer {{TOKEN}}
 
 ### Criar uma nova área
 POST {{BASE}}/areas
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "nomeArea": "Área de Cabeleireiro",
@@ -16,6 +28,7 @@ Content-Type: application/json
 ### Criar uma nova área repetida
 POST {{BASE}}/areas
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "nomeArea": "Área de Cabeleireiro",
@@ -25,6 +38,7 @@ Content-Type: application/json
 ### Atualizar uma área existente
 PUT {{BASE}}/areas/1
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "nomeArea": "Área de Cabeleireiro",
@@ -35,6 +49,7 @@ Content-Type: application/json
 ### Atualizar uma área inexistente
 PUT {{BASE}}/areas/999
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "nomeArea": "Área Inexistente",
@@ -45,7 +60,9 @@ Content-Type: application/json
 ### Deletar uma área
 DELETE {{BASE}}/areas/1
 Accept: application/json
+Authorization: Bearer {{TOKEN}}
 
 ### Deletar uma área inexistente
 DELETE {{BASE}}/areas/999
-Accept: application/json    
+Accept: application/json
+Authorization: Bearer {{TOKEN}}  

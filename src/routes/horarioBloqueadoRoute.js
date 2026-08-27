@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const horarioBloqueadoController = require("../controllers/horarioBloqueadoController");
+const { authenticateToken, authorizePerfil } = require("../middlewares/authMiddleware");
 
-router.get("/", horarioBloqueadoController.getAll);
-router.post("/", horarioBloqueadoController.create);
-router.put("/:id", horarioBloqueadoController.update);
-router.delete("/:id", horarioBloqueadoController.delete);
+router.get("/", authenticateToken, authorizePerfil("admin"), horarioBloqueadoController.getAll);
+router.post("/", authenticateToken, authorizePerfil("admin"), horarioBloqueadoController.create);
+router.put("/:id", authenticateToken, authorizePerfil("admin"), horarioBloqueadoController.update);
+router.delete("/:id", authenticateToken, authorizePerfil("admin"), horarioBloqueadoController.delete);
 
 module.exports = router;

@@ -1,11 +1,23 @@
 @BASE = http://localhost:3000
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21lIjoiQWRtaW5pc3RyYWRvciIsImVtYWlsIjoiYWRtaW5AcHJvYmVhdXR5LmNvbSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNzg3ODQyNDU3LCJleHAiOjE3ODc4NDYwNTd9.Nu9XgxD0Tc3ARWdEhbkOHaO2vi6GzFEqdVnL7d6OBcQ
+
+### Login do novo usuário (pegar o token gerado abaixo)
+POST {{BASE}}/auth/login
+Content-Type: application/json
+
+{
+    "emailUsuario": "admin@probeauty.com",
+    "senha_hash": "senha123"
+}
 
 ### Listar todos os horários bloqueados
 GET {{BASE}}/horarios_bloqueados
+Authorization: Bearer {{TOKEN}}
 
 ### Criar um novo horário bloqueado
 POST {{BASE}}/horarios_bloqueados
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "profissional_id": 2,
@@ -17,6 +29,7 @@ Content-Type: application/json
 ### Atualizar um horário bloqueado existente
 PUT {{BASE}}/horarios_bloqueados/1
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "profissional_id": 2,
@@ -28,6 +41,7 @@ Content-Type: application/json
 ### Atualizar um horário bloqueado inexistente
 PUT {{BASE}}/horarios_bloqueados/999
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "profissional_id": 2,
@@ -39,7 +53,9 @@ Content-Type: application/json
 ### Deletar um horário bloqueado existente
 DELETE {{BASE}}/horarios_bloqueados/1
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 ### Deletar um horário bloqueado inexistente
 DELETE {{BASE}}/horarios_bloqueados/999
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}

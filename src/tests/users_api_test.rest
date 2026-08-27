@@ -1,12 +1,25 @@
 @BASE = http://localhost:3000
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21lIjoiQWRtaW5pc3RyYWRvciIsImVtYWlsIjoiYWRtaW5AcHJvYmVhdXR5LmNvbSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNzg3ODQyNDU3LCJleHAiOjE3ODc4NDYwNTd9.Nu9XgxD0Tc3ARWdEhbkOHaO2vi6GzFEqdVnL7d6OBcQ
+
+### Login do novo usuário (pegar o token gerado abaixo)
+POST {{BASE}}/auth/login
+Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
+
+{
+    "emailUsuario": "admin@probeauty.com",
+    "senha_hash": "senha123"
+}
 
 ### Listar todos os usuários
 GET {{BASE}}/users
 Accept: application/json
+Authorization: Bearer {{TOKEN}}
 
 ### Criar um novo usuário
 POST {{BASE}}/users
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "nomeUsuario": "Ana Almeida",
@@ -18,6 +31,7 @@ Content-Type: application/json
 ### Criar um novo usuário com email inválido
 POST {{BASE}}/users
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "nomeUsuario": "Teste E-mail Inválido",
@@ -29,6 +43,7 @@ Content-Type: application/json
 ### Criar um novo usuário com email repetido
 POST {{BASE}}/users
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "nomeUsuario": "Teste E-mail Repetido",
@@ -40,6 +55,7 @@ Content-Type: application/json
 ### Atualizar um usuário existente
 PUT {{BASE}}/users/1
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "nomeUsuario": "Julio Silva",
@@ -51,6 +67,7 @@ Content-Type: application/json
 ### Atualizar um usuário inexistente
 PUT {{BASE}}/users/999
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "nomeUsuario": "Usuário Inexistente",
@@ -62,7 +79,9 @@ Content-Type: application/json
 ### Deletar um usuário
 DELETE {{BASE}}/users/1
 Accept: application/json
+Authorization: Bearer {{TOKEN}}
 
 ### Deletar um usuário inexistente
 DELETE {{BASE}}/users/999
-Accept: application/json    
+Accept: application/json
+Authorization: Bearer {{TOKEN}}  

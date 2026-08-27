@@ -1,12 +1,24 @@
 @BASE = http://localhost:3000
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21lIjoiQWRtaW5pc3RyYWRvciIsImVtYWlsIjoiYWRtaW5AcHJvYmVhdXR5LmNvbSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNzg3ODQyNzc4LCJleHAiOjE3ODc4NDYzNzh9.GgdTF9FLYYBmlY64ZIYv0kHvbsRoas_IzYa-lKPEEcQ
+
+### Login do novo usuário (pegar o token gerado abaixo)
+POST {{BASE}}/auth/login
+Content-Type: application/json
+
+{
+    "emailUsuario": "admin@probeauty.com",
+    "senha_hash": "senha123"
+}
 
 ### Listar todos os horários de trabalho
 GET {{BASE}}/horarios_trabalho
 Accept: application/json
+Authorization: Bearer {{TOKEN}}
 
 ### Criar um novo horário de trabalho
 POST {{BASE}}/horarios_trabalho
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "profissional_id": 3,
@@ -18,6 +30,7 @@ Content-Type: application/json
 ### Atualizar um horário de trabalho existente
 PUT {{BASE}}/horarios_trabalho/2
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "profissional_id": 2,
@@ -29,6 +42,7 @@ Content-Type: application/json
 ### Atualizar um horário de trabalho inexistente
 PUT {{BASE}}/horarios_trabalho/999
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "profissional_id": 3,
@@ -40,7 +54,9 @@ Content-Type: application/json
 ### Deletar um horário de trabalho existente
 DELETE {{BASE}}/horarios_trabalho/2
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 ### Deletar um horário de trabalho inexistente
 DELETE {{BASE}}/horarios_trabalho/999
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}

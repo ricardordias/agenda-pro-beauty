@@ -1,16 +1,29 @@
 @BASE = http://localhost:3000
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21lIjoiQWRtaW5pc3RyYWRvciIsImVtYWlsIjoiYWRtaW5AcHJvYmVhdXR5LmNvbSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNzg3ODQyNDU3LCJleHAiOjE3ODc4NDYwNTd9.Nu9XgxD0Tc3ARWdEhbkOHaO2vi6GzFEqdVnL7d6OBcQ
+
+### Login do novo usuário (pegar o token gerado abaixo)
+POST {{BASE}}/auth/login
+Content-Type: application/json
+
+{
+    "emailUsuario": "admin@probeauty.com",
+    "senha_hash": "senha123"
+}
 
 ### Listar todos os serviços
 GET {{BASE}}/servicos
 Accept: application/json
+Authorization: Bearer {{TOKEN}}
 
 ### Listar serviços por área
 GET {{BASE}}/servicos/area/2
 Accept: application/json
+Authorization: Bearer {{TOKEN}}
 
 ### Criar um novo serviço
 POST {{BASE}}/servicos
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "area_id": "1",
@@ -22,6 +35,7 @@ Content-Type: application/json
 ### Atualizar um serviço existente
 PUT {{BASE}}/servicos/1
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "area_id": "1",
@@ -33,6 +47,7 @@ Content-Type: application/json
 ### Atualizar um serviço inexistente
 PUT {{BASE}}/servicos/1
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "area_id": "999",
@@ -44,7 +59,9 @@ Content-Type: application/json
 ### Deletar um serviço
 DELETE {{BASE}}/servicos/1
 Accept: application/json
+Authorization: Bearer {{TOKEN}}
 
 ### Deletar um serviço inexistente
 DELETE {{BASE}}/servicos/999
-Accept: application/json    
+Accept: application/json
+Authorization: Bearer {{TOKEN}}

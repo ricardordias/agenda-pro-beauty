@@ -1,12 +1,12 @@
-@BASEURL = http://localhost:3000
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21lIjoiVXN1w6FyaW8gbm92byIsImVtYWlsIjoibm92b0BpZnJzLmVkdS5iciIsInBlcmZpbCI6ImNsaWVudGUiLCJpYXQiOjE3ODc4NDAyMTksImV4cCI6MTc4Nzg0MzgxOX0.LGdHwuZMTeDW0HTZWiz-KMkUQ8ha0TSJgOeYjhIAlkQ
+@BASE = http://localhost:3000
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21lIjoiVXN1w6FyaW8gbm92byIsImVtYWlsIjoibm92b0BpZnJzLmVkdS5iciIsInBlcmZpbCI6ImNsaWVudGUiLCJpYXQiOjE3ODc4NDAyMTksImV4cCI6MTc4Nzg0MzgxOX0.LGdHwuZMTeDW0HTZWiz-KMkUQ8ha0TSJgOeYjhIAlkQ
 
 ### Rota pública (acesso livre)
-GET {{BASEURL}}/public/home
+GET {{BASE}}/public/home
 Content-Type: application/json
 
 ### Cadastro de novo usuário
-POST {{BASEURL}}/auth/register
+POST {{BASE}}/auth/register
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### Login do novo usuário (pegar o token gerado abaixo)
-POST {{BASEURL}}/auth/login
+POST {{BASE}}/auth/login
 Content-Type: application/json
 
 {
@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 ### Login do usuário comum (usuário já existente no banco)
-POST {{BASEURL}}/auth/login
+POST {{BASE}}/auth/login
 Content-Type: application/json
 
 {
@@ -35,7 +35,7 @@ Content-Type: application/json
 }
 
 ### Login do administrador (usuário já existente no banco)
-POST {{BASEURL}}/auth/login
+POST {{BASE}}/auth/login
 Content-Type: application/json
 
 {
@@ -44,9 +44,9 @@ Content-Type: application/json
 }
 
 ### Acesso ao painel (rota protegida, requer token de qualquer usuário autenticado)
-GET {{BASEURL}}/protected/dashboard
-Authorization: Bearer {{token}}
+GET {{BASE}}/protected/dashboard
+Authorization: Bearer {{TOKEN}}
 
 ### Acesso à área admin (rota protegida, requer token de usuário com perfil "admin")
-GET {{BASEURL}}/protected/admin
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21lIjoiQWRtaW5pc3RyYWRvciIsImVtYWlsIjoiYWRtaW5AcHJvYmVhdXR5LmNvbSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNzg3ODQwMjQ4LCJleHAiOjE3ODc4NDM4NDh9.HvJNpKR7uuDNze_tjbNf79ZDltH0gCFUOxWlla4u42k
+GET {{BASE}}/protected/admin
+Authorization: Bearer {{TOKEN}}

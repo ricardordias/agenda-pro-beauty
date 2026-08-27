@@ -1,14 +1,27 @@
 @BASE = http://localhost:3000
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21lIjoiQWRtaW5pc3RyYWRvciIsImVtYWlsIjoiYWRtaW5AcHJvYmVhdXR5LmNvbSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNzg3ODQyNDU3LCJleHAiOjE3ODc4NDYwNTd9.Nu9XgxD0Tc3ARWdEhbkOHaO2vi6GzFEqdVnL7d6OBcQ
+
+### Login do novo usuário (pegar o token gerado abaixo)
+POST {{BASE}}/auth/login
+Content-Type: application/json
+
+{
+    "emailUsuario": "admin@probeauty.com",
+    "senha_hash": "senha123"
+}
 
 ### Listar todos os status de agendamento
 GET {{BASE}}/status_agendamento
+Authorization: Bearer {{TOKEN}}
 
 ### Listar status de agendamento por ID
 GET {{BASE}}/status_agendamento/2
+Authorization: Bearer {{TOKEN}}
 
 ### Criar um novo status de agendamento
 POST {{BASE}}/status_agendamento
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "nomeStatus": "Confirmado",
@@ -18,6 +31,7 @@ Content-Type: application/json
 ### Criar um novo status de agendamento
 POST {{BASE}}/status_agendamento
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "nomeStatus": "Agendado",
@@ -27,6 +41,7 @@ Content-Type: application/json
 ### Criar um novo status de agendamento
 POST {{BASE}}/status_agendamento
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "nomeStatus": "Cancelado",
@@ -36,6 +51,7 @@ Content-Type: application/json
 ### Atualizar um status de agendamento existente
 PUT {{BASE}}/status_agendamento/3
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "nomeStatus": "Cancelado",
@@ -44,4 +60,4 @@ Content-Type: application/json
 
 ### Deletar um status de agendamento
 DELETE {{BASE}}/status_agendamento/3
-
+Authorization: Bearer {{TOKEN}}

@@ -1,13 +1,14 @@
 @BASE = http://localhost:3000
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21lIjoiVXN1w6FyaW8gbm92byIsImVtYWlsIjoibm92b0BpZnJzLmVkdS5iciIsInBlcmZpbCI6ImNsaWVudGUiLCJpYXQiOjE3ODc4NDAyMTksImV4cCI6MTc4Nzg0MzgxOX0.LGdHwuZMTeDW0HTZWiz-KMkUQ8ha0TSJgOeYjhIAlkQ
+@TOKEN = 
 
-### Rota pública (acesso livre)
 GET {{BASE}}/public/home
 Content-Type: application/json
+
 
 ### Cadastro de novo usuário
 POST {{BASE}}/auth/register
 Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
 
 {
     "nomeUsuario": "Usuário novo",
@@ -21,7 +22,7 @@ POST {{BASE}}/auth/login
 Content-Type: application/json
 
 {
-    "emailUsuario": "novo@ifrs.edu.br",
+    "emailUsuario": "admin@probeauty.com",
     "senha_hash": "senha123"
 }
 

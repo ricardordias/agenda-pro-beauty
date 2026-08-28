@@ -1,5 +1,5 @@
 @BASE = http://localhost:3000
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21lIjoiQWRtaW5pc3RyYWRvciIsImVtYWlsIjoiYWRtaW5AcHJvYmVhdXR5LmNvbSIsInBlcmZpbCI6ImFkbWluIiwiaWF0IjoxNzg3ODQyNzc4LCJleHAiOjE3ODc4NDYzNzh9.GgdTF9FLYYBmlY64ZIYv0kHvbsRoas_IzYa-lKPEEcQ
+@TOKEN = 
 
 ### Login do novo usuário (pegar o token gerado abaixo)
 POST {{BASE}}/auth/login

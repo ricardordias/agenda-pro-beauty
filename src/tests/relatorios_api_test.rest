@@ -1,0 +1,26 @@
+@BASE = http://localhost:3000
+@TOKEN = 
+
+### Login do administrador (pegar o token gerado abaixo)
+POST {{BASE}}/auth/login
+Content-Type: application/json
+
+{
+    "emailUsuario": "admin@probeauty.com",
+    "senha_hash": "senha123"
+}
+
+### Total de agendamentos
+GET {{BASE}}/relatorios/total_agendamentos
+Accept: application/json
+Authorization: Bearer {{TOKEN}}
+
+### Serviços mais solicitados
+GET {{BASE}}/relatorios/servicos_mais_solicitados
+Accept: application/json
+Authorization: Bearer {{TOKEN}}
+
+### Profissionais mais requisitados
+GET {{BASE}}/relatorios/profissionais_mais_requisitados
+Accept: application/json
+Authorization: Bearer {{TOKEN}}
